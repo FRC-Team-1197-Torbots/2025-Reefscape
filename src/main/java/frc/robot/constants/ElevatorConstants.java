@@ -15,11 +15,11 @@ public final class ElevatorConstants {
 
 
     public static final double MinHeight = 0;
-    public static final double MaxHeight = Units.inchesToMeters(25);
+    public static final double MaxHeight = Units.inchesToMeters(50);
     public static final double Tolerance = 1;
     public static final double ApproachingTargetThreshold = 0.9;
 
-    // from block cad
+    // from block cad - may need to multiply by 2
     public static final double Store = Units.inchesToMeters(0);
     public static final double Station = Units.inchesToMeters(1);
     public static final double L1 = Units.inchesToMeters(3.559);
@@ -30,6 +30,6 @@ public final class ElevatorConstants {
     public static final double Net = Units.inchesToMeters(25);
     
 
-    public static final double DiameterMeters = Units.inchesToMeters(1.533); // ask alex what this should be
+    public static final double DiameterMeters = Units.inchesToMeters(1.751); // ask alex what this should be
     public static final double MotorReduction = 58.0 / 7.0; 
 }

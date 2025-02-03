@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
@@ -29,6 +30,7 @@ public class RobotContainer {
   // define controllers
   private final CommandXboxController m_driverController = new CommandXboxController(0);
   private final CommandXboxController m_mechController = new CommandXboxController(1);
+  private final CommandJoystick m_Joystick = new CommandJoystick(0);
   
   // The robot's subsystems and commands are defined here...
   // private final Claw m_claw = new Claw();
@@ -74,9 +76,11 @@ public class RobotContainer {
       m_driverController.povUp().onTrue(Commands.runOnce(() -> m_robotDrive.zeroHeading()));
 
       
-      m_driverController.b().onTrue(m_elevator.updateFromDashboard());
+      // m_driverController.b().onTrue(m_elevator.updateFromDashboard());
       // m_driverController.y().whileTrue(m_elevator.testKg());
-
+      m_Joystick.button(1).onTrue(Commands.runOnce(() -> m_elevator.setTarget(0.5), m_elevator));
+      m_Joystick.button(2).onTrue(Commands.runOnce(() -> m_elevator.setTarget(0), m_elevator));
+      m_Joystick.button(3).onTrue(Commands.runOnce(() -> m_elevator.setTarget(1.27), m_elevator));
 
 
       // grab a kG value from smartdashboard and apply the voltage to the elevator motors

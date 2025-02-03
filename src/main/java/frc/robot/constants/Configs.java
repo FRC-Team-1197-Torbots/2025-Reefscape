@@ -87,16 +87,16 @@ public final class Configs {
                         leftMotorConfig.idleMode(IdleMode.kCoast);
                         leftMotorConfig.secondaryCurrentLimit(60);
                         leftMotorConfig.smartCurrentLimit(50);
-                        double positionFactor = ElevatorConstants.MotorReduction * ElevatorConstants.DiameterMeters * Math.PI * 2; // times 2 because cascade
+                        double positionFactor = ElevatorConstants.DiameterMeters * Math.PI * 2 / ElevatorConstants.MotorReduction; // times 2 because cascade
                         leftMotorConfig.encoder.positionConversionFactor(positionFactor); // meters
-                        leftMotorConfig.encoder.positionConversionFactor(positionFactor / 60); // meters per sec
+                        leftMotorConfig.encoder.velocityConversionFactor(positionFactor / 60); // meters per sec
                         leftMotorConfig.closedLoop
                                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                                 .pid(ElevatorConstants.kP, ElevatorConstants.kI,ElevatorConstants.kD);
                         leftMotorConfig.closedLoop.maxMotion
                                 .maxVelocity(ElevatorConstants.MaxVelocity)
-                                .maxAcceleration(ElevatorConstants.MaxAcceleration);
-
+                                .maxAcceleration(ElevatorConstants.MaxAcceleration)
+                                .allowedClosedLoopError(0.01);
                         rightMotorConfig.apply(leftMotorConfig);
                         rightMotorConfig.follow(ElevatorConstants.leftMotorId,false);
         }
